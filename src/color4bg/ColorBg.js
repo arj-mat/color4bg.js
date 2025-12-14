@@ -13,6 +13,7 @@ export class ColorBg {
 		this.options = {}
 
 		this.loop = params.loop || false
+		this.speed = params.speed || 1
 
 		// Color init
 		this.colors_num = num
