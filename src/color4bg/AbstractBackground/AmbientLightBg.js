@@ -30,7 +30,7 @@ export class AmbientLightBg extends ColorBg {
 		this.name = "ambient-light"
 
 		this.typedata = types[type]
-		this.speed = 500
+		this.speed = this.speed || 500
 
 		this.start()
 	}
