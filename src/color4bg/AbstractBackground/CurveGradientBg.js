@@ -7,7 +7,7 @@ export class CurveGradientBg extends ColorBg {
 		super(params, 6)
 		this.name = "curve-gradient"
 
-		this.speed = 1
+		this.speed = this.speed || 1
 
 		this.start()
 	}
@@ -131,7 +131,6 @@ export class CurveGradientBg extends ColorBg {
 
 	_animate() {
 		this.rttProgram.uniforms.u_time.value = (this.frame * this.speed) / 100
-		console.log(1)
 	}
 
 	update(option, val) {
