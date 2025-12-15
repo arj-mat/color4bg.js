@@ -142,7 +142,7 @@ export class ColorBg {
 		this._makeMaterial()
 		this._make()
 
-		new FrequencyClock(this.hz, () => this._update);
+		new FrequencyClock(this.hz, () => this._update());
 	}
 
 	resize() {
@@ -187,8 +187,6 @@ export class ColorBg {
 	}
 
 	_update = () => {
-		requestAnimationFrame(this._update)
-
 		if (this.loop) {
 			this.frame++
 			this._animate()
