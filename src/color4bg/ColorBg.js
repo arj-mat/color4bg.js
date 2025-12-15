@@ -7,25 +7,31 @@ seed()
 // document.body.appendChild( stats.dom );
 
 class FrequencyClock {
-    constructor(frequencyHz, tick) {
+	constructor(frequencyHz, tick) {
 		this.frequencyHz = frequencyHz;
+		this.tick = tick;
+		this.lastTick = 0;
 		
-        requestAnimationFrame(() => {
-            if (this.shouldTick()) {
-                tick();
-            }
-        });
-    }
+		requestAnimationFrame(() => this.loop());
+	}
 
-    shouldTick() {
-        const now = performance.now();
-        if (now - this.lastTick >= 1000 / this.frequencyHz) {
-            this.lastTick = now;
-            return true;
-        }
+	loop() {
+		if (this.shouldTick()) {
+			this.tick();
+		}
 
-        return false;
-    }
+		requestAnimationFrame(() => this.loop());
+	}
+
+	shouldTick() {
+		const now = performance.now();
+		if (now - this.lastTick >= 1000 / this.frequencyHz) {
+			this.lastTick = now;
+			return true;
+		}
+
+		return false;
+	}
 }
 
 export class ColorBg {
