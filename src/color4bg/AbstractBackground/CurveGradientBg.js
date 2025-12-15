@@ -8,6 +8,7 @@ export class CurveGradientBg extends ColorBg {
 		this.name = "curve-gradient"
 
 		this.speed = this.speed || 1
+		this.hz = this.hz || 60
 
 		this.start()
 	}
