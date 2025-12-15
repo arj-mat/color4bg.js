@@ -6,6 +6,28 @@ seed()
 // const stats = new Stats();
 // document.body.appendChild( stats.dom );
 
+class FrequencyClock {
+    constructor(frequencyHz, tick) {
+		this.frequencyHz = frequencyHz;
+		
+        requestAnimationFrame(() => {
+            if (this.shouldTick()) {
+                tick();
+            }
+        });
+    }
+
+    public shouldTick(): boolean {
+        const now = performance.now();
+        if (now - this.lastTick >= 1000 / this.frequencyHz) {
+            this.lastTick = now;
+            return true;
+        }
+
+        return false;
+    }
+}
+
 export class ColorBg {
 	constructor(params = {}, num) {
 		this.params = params
@@ -14,6 +36,7 @@ export class ColorBg {
 
 		this.loop = params.loop || false
 		this.speed = params.speed || 1
+		this.hz = params.hz || 60
 
 		// Color init
 		this.colors_num = num
@@ -113,7 +136,7 @@ export class ColorBg {
 		this._makeMaterial()
 		this._make()
 
-		requestAnimationFrame(this._update)
+		new FrequencyClock(this.hz, () => this._update);
 	}
 
 	resize() {
