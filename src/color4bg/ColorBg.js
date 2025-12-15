@@ -17,7 +17,7 @@ class FrequencyClock {
         });
     }
 
-    public shouldTick(): boolean {
+    shouldTick() {
         const now = performance.now();
         if (now - this.lastTick >= 1000 / this.frequencyHz) {
             this.lastTick = now;
